@@ -21,8 +21,8 @@
         <link rel="icon" type="image/png" href="favicon.ico" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-
-        <script src="public/js/vendor/modernizr-2.6.2.min.js"></script>
+        {{HTML::script('js/vendor/modernizr-2.6.2.min.js')}}    
+        <!--<script src="public/js/vendor/modernizr-2.6.2.min.js"></script>-->
     </head>
     <body>
         <!--[if lt IE 7]>
