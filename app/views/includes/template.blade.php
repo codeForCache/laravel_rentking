@@ -32,7 +32,14 @@
             <div id="logo"><img src="{{URL::to('img/mobile/rk_logo.svg')}}" alt="rentking.co.nz"></div>
             <div id="help"><a href="">Help</a></div>
             <div id="account">
-                <div id="user">Matthew Youngleson</div>
+
+                
+               
+                @if(Auth::check())
+                <div id="user">->{{Auth::user()->user_name}}</div>
+                @else
+                <div id="user">No Login!</div>
+                @endif
                 <div id="control" class="pointer">
                     <div id="user_icon"><i class="fa fa-user fa-fw fa-lg"></i></div>
                     <div id="selector"><i class="fa fa-sort-desc fa-fw fa-lg"></i></div>                    

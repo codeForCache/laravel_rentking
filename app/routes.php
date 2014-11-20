@@ -32,11 +32,10 @@ Route::get('/', function()
 
 	//validate input
 		$aRules = array(
-			"username" => "required|unique:users",
+			"user_name" => "required|unique:users",
 			"password" => "required|confirmed",
 			"password_confirmation" => "required",			
-			"email" => "email|unique:users",
-			
+			"email" => "required|email|unique:users",			
 			);
 
 
@@ -52,11 +51,41 @@ Route::get('/', function()
 			$aDetails["password"] = Hash::make($aDetails["password"]);
 			User::create($aDetails);
 
-			//redirect home page
-			return Redirect::to("main");
+			//redirect main view page
+			return Redirect::to("/");
 			
 
 		}
 	
 	});
-//------------------Validate new user creation-------------------------------------		
+//------------------Validate new user creation-------------------------------------
+
+
+//------------------Create Login Form-------------------------------------
+	Route::get('login', function() {
+
+	return View::make("loginForm");
+	
+	});
+//------------------Create Login Form-------------------------------------	
+
+
+//------------------User Login Auth-------------------------------------
+	Route::post('login', function(){
+
+	$aLoginDetails = array(
+		'user_name' => Input::get('user_name'),
+		'password' => Input::get('password')
+		);
+
+	if(Auth::attempt($aLoginDetails)){
+		//redirect to user home page
+		//ideally should redirect back to origin
+		return Redirect::intended("/".Auth::user()->id);
+	}else{
+		//send back to login page with errors
+		return Redirect::to("login")->with("error","Login Failed! Try again.");
+	}
+	
+	});
+//------------------User Login Auth-------------------------------------	

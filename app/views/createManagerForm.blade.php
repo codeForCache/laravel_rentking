@@ -14,45 +14,45 @@
 				<!-- <legend>Registration</legend> -->
 				<h3>Manager Account Registration</h3>
 				<h4>Please fill in your details:</h4>
-				<p>RentKing site access:</p>
+				<p>RentKing site access:</p>				
 				
-				{{Form::text('username', '',  array('placeholder' => 'username', 'autocomplete' => 'off', 'name' => 'username', 'id' => 'username'))}}				
-				<!-- {{$errors->first('username','<span id="username_error"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}} -->
-				
-				
-				{{Form::password('password', '',  array('placeholder' => 'password', 'autocomplete' => 'off', 'name' => 'password', 'id' => 'password'))}}
-				<!-- <span id="password_error"></span> -->
 
+				{{Form::text('user_name', '',  array('placeholder' => 'username*', 'autocomplete' => 'off',))}}				
+				{{$errors->first('user_name','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
 				
-				{{Form::password('password_confirmation', '',  array('placeholder' => 'password confirmation', 'autocomplete' => 'off', 'name' => 'password_confirmation', 'id' => 'password_confirmation'))}}
-				<!-- <span id="confirm_error"></span>  -->                            
-			</fieldset>
+				{{ Form::password('password', array('placeholder' => 'password*', 'autocomplete' => 'off', 'id' => 'password')) }}				
+				{{$errors->first('password','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
+				
+				{{Form::password('password_confirmation', array('placeholder' => 'password confirmation*', 'autocomplete' => 'off', 'id' => 'password_confirmation'))}}
+				                           
+			</fieldset> 
 			<fieldset>                   
 				<p>What is your name?</p>
-
-				<input type="text" name="firstname" id="firstname" autocomplete="on" placeholder="first name" />
-				<span id="firstname_error"></span>  
-
-				<input type="text" name="lastname" id="lastname" autocomplete="on" placeholder="last name" />
-				<span id="lastname_error"></span>                          
+				
+				{{Form::text('first_name', '',  array('placeholder' => 'first name', 'autocomplete' => 'on', 'id' => 'firstname'))}}				
+				
+				
+				{{Form::text('last_name', '',  array('placeholder' => 'last name', 'autocomplete' => 'on', 'id' => 'lastname'))}}				
+				                         
 			</fieldset>
 			<fieldset>                   
 				<p>Company Info:</p>
 
-				<input type="text" name="company_name" id="company_name" autocomplete="off" placeholder="company name/dba" />
-				<span id="company_error"></span>        
+				
+				{{Form::text('company_name', '',  array('placeholder' => 'company name/dba', 'id' => 'company_name'))}}
+				       
 			</fieldset>
 			<fieldset>                   
 				<p>Your contact info:</p>
-
-				<input type="email" name="email" id="email" autocomplete="on" placeholder="email address" />
-				<span id="email_error"></span>
-
-				<input type="tel" name="phone" id="phone" autocomplete="on" placeholder="phone number" />
-				<span id="phone_error"></span>                            
+				
+				{{Form::email('email', '',  array('placeholder' => 'email address*', 'autocomplete' => 'on', 'id' => 'email'))}}				
+				{{$errors->first('email','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
+				
+				{{Form::text('phone', '',  array('placeholder' => 'phone number', 'autocomplete' => 'on', 'id' => 'phone'))}}				
+				                         
 			</fieldset>
-			<button  type="submit" class="btn">All done. Start using RentKing!</button>
-
+			
+			{{ Form::button('All done. Start using RentKing!', array('class' => 'btn', 'type' => 'submit')) }}
 
 		{{ Form::close()}}
 		

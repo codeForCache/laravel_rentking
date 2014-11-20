@@ -6,6 +6,24 @@ html,body{
 }
 @media only screen {
 
+	/*errors*/
+
+	.errors{
+		display: block;
+		background-color: #F8F8F5;
+		outline: 1px solid #D9534F;
+		font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
+		font-size: .9em;
+		color: #D9534F;
+		width: 90%;
+		height: 2em;
+		line-height: 2em;
+		margin-top: .314em;
+		margin-bottom: .314em;
+	}
+
+	/*/errors*/
+
 	body{
 		background-color: #F8F8F5;
 		font-size: 1em;
@@ -401,11 +419,11 @@ html,body{
 	/*Tenant CSS*/
 
 	/*register*/
-	.registration, .account_form, .unit_form, .reply_form, .newwo_form{
+	.registration, .account_form, .unit_form, .reply_form, .newwo_form, .login_form{
 		margin: .314em;
 		padding: .314em;
 	}
-	.registration input, .account_form input, .unit_form input, .reply_form input, .newwo_form input{
+	.registration input, .account_form input, .unit_form input, .reply_form input, .newwo_form input, .login_form input{
 		display: block;
 		font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
 		width: 80%;
@@ -414,8 +432,8 @@ html,body{
 		margin-bottom: .314em;		
 	}
 
-	.registration span, .account_form span, .unit_form span, .reply_form span, .newwo_form span{
-		display: block;
+	.registration span, .account_form span, .unit_form span, .reply_form span, .newwo_form span, .login_form span{
+		/*display: block;
 		background-color: #F8F8F5;
 		outline: 1px solid #D9534F;
 		font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
@@ -425,10 +443,10 @@ html,body{
 		line-height: 2em;
 		margin-top: .314em;
 		margin-bottom: .314em;
-		display: none;
+		/*display: none;*/
 	}
 
-	.registration button, .account_form button, .unit_form button , .reply_form button, .newwo_form button{
+	.registration button, .account_form button, .unit_form button , .reply_form button, .newwo_form button, .login_form button{
 		width: 80%;
 		height: 3.314em;
 		margin-top: .314em;
@@ -732,18 +750,18 @@ html,body{
 
 	/*forms*/
 
-	.registration input, .account_form input, .unit_form input, .reply_form input, .newwo_form input{
+	.registration input, .account_form input, .unit_form input, .reply_form input, .newwo_form input, .login_form input{
 		
 		width: 24%;				
 	}
 
-	.registration span, .account_form span, .unit_form span, .reply_form span, .newwo_form span{		
+	.registration span, .account_form span, .unit_form span, .reply_form span, .newwo_form span, .login_form span{		
 		
 		width: 24%;
 		
 	}
 
-	.registration button, .account_form button, .unit_form button , .reply_form button, .newwo_form button{
+	.registration button, .account_form button, .unit_form button , .reply_form button, .newwo_form button, .login_form button{
 		width: 24%;
 		
 	}
