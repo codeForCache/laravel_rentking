@@ -26,7 +26,12 @@ Route::get('/', function()
 	});
 //------------------Create New Manager Form-------------------------------------
 
+	Route::get('dummy', function(){
 
+	return View::make("addUnitForm");
+	
+	});
+//------------------Create New Manager Form-------------------------------------
 
 //------------------Validate new user creation-------------------------------------
 	Route::post('users', function(){
