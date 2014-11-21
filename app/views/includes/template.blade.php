@@ -18,7 +18,8 @@
         {{HTML::style('css/app.css')}}        
        
 
-        <link rel="icon" type="image/png" href="favicon.ico" />
+       <!--  <link rel="icon" type="image/png" href="favicon.ico" /> -->
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
             
         
     </head>
@@ -36,9 +37,9 @@
                 
                
                 @if(Auth::check())
-                <div id="user">->{{Auth::user()->user_name}}</div>
+                <div id="user">->{{HTML::link('users/'.Auth::user()->id.'/edit', Auth::user()->user_name)}}</div>
                 @else
-                <div id="user">No Login!</div>
+                <div id="user">{{HTML::link('login','No Login!')}}</div>
                 @endif
                 <div id="control" class="pointer">
                     <div id="user_icon"><i class="fa fa-user fa-fw fa-lg"></i></div>
@@ -46,9 +47,17 @@
                 </div>
                 <ul id="control_panel">                                        
                     <!-- <li><a href=""><i class="fa fa-suitcase fa-fw fa-lg"></i> <span>Account Control Panel</span></a></li> -->
-                    <li><a href=""><i class="fa fa-user fa-fw fa-lg"></i> <span>Manage Account</span></a></li>
+                    @if(Auth::check())
+                    <li><a href="{{URL::to('users/'.Auth::user()->id.'/edit')}}"><i class="fa fa-user fa-fw fa-lg"></i> <span>Manage Account</span></a></li>
+                    @else
+                    <li><a href="{{URL::to('login')}}"><i class="fa fa-user fa-fw fa-lg"></i> <span>Manage Account</span></a></li>    
+                    @endif
                     <li><a href=""><i class="fa fa-cc-visa fa-fw fa-lg"></i> <span>RentKing Billing</span></a></li>
-                    <li><a href=""><i class="fa fa-sign-out fa-fw fa-lg"></i> <span>Log Out</span></a></li>                   
+                    @if(Auth::check())
+                    <li><a href="{{URL::to('logout')}}"><i class="fa fa-sign-out fa-fw fa-lg"></i> <span>Log Out</span></a></li>
+                    @else
+                    <li><a href="{{URL::to('login')}}"><i class="fa fa-sign-out fa-fw fa-lg"></i> <span>Log In</span></a></li>
+                    @endif                   
                     <li><a href=""><i class="fa fa-times fa-fw fa-lg"></i> <span>Close This</span></a></li>
                 </ul>
             </div>            
@@ -57,7 +66,7 @@
             <ul>
                 <li><a href="#" id="managers">Managers</a>
                     <ul>
-                        <li><a href=""><i class="fa fa-home fa-fw fa-lg"></i> <span>Units & Tenants</span></a></li>
+                        <li><a href="{{URL::to('/')}}"><i class="fa fa-home fa-fw fa-lg"></i> <span>Units & Tenants</span></a></li>
                         <li><a href=""><i class="fa fa-cogs fa-fw fa-lg"></i> <span>Work Orders</span></a></li>
                          <li><a href=""><i class="fa fa-comments-o fa-fw fa-lg"></i> <span>Messages</span></a></li>
                         <li><a href=""><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Add A Unit</span></a></li>
@@ -74,10 +83,10 @@
                 <li><a href="#">Pricing & Signup</a>
                     <ul>
                         <li><a href=""><i class="fa fa-calculator fa-fw fa-lg"></i> <span>RentKing Service Pricing</span></a></li>
-                        <li><a href=""><i class="fa fa-pencil fa-fw fa-lg"></i> <span>Account Registration</span></a></li>                        
+                        <li><a href="{{URL::to('users/create')}}"><i class="fa fa-pencil fa-fw fa-lg"></i> <span>Account Registration</span></a></li>                        
                     </ul>
                 </li>
-                <li><a href="#">Log in</a></li>
+                <li><a href="{{URL::to('login')}}">Log in</a></li>
             </ul>            
         </div>
         <!-- main -->

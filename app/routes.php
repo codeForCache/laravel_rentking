@@ -27,6 +27,7 @@ Route::get('/', function()
 //------------------Create New Manager Form-------------------------------------
 
 
+
 //------------------Validate new user creation-------------------------------------
 	Route::post('users', function(){
 
@@ -81,11 +82,36 @@ Route::get('/', function()
 	if(Auth::attempt($aLoginDetails)){
 		//redirect to user home page
 		//ideally should redirect back to origin
-		return Redirect::intended("/".Auth::user()->id);
+		return Redirect::intended("/");
 	}else{
 		//send back to login page with errors
 		return Redirect::to("login")->with("error","Login Failed! Try again.");
 	}
 	
 	});
-//------------------User Login Auth-------------------------------------	
+//------------------User Login Auth-------------------------------------
+
+
+//------------------Log Out-------------------------------------
+	Route::get('logout', function() {
+
+	Auth::logout();
+	return Redirect::to('login');
+	
+	});
+//------------------Log Out-------------------------------------
+
+
+//------------------Get Logged user and edit details data-------------------------------------
+	Route::get('users/{id}/edit', function($id) {
+
+	if($id != Auth::user()->id){
+		return Redirect::to('login');
+	}
+
+	$oUser = User::find($id);
+
+	return View::make("editAccountForm")->with("user",$oUser);
+
+	});
+//------------------Get Logged user and edit details data-------------------------------------	
