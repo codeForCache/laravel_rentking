@@ -26,22 +26,19 @@ Route::get('/', function()
 	});
 //------------------Create New Manager Form-------------------------------------
 
-	Route::get('dummy', function(){
 
-	return View::make("addUnitForm");
-	
-	});
-//------------------Create New Manager Form-------------------------------------
 
 //------------------Validate new user creation-------------------------------------
 	Route::post('users', function(){
 
 	//validate input
 		$aRules = array(
-			"user_name" => "required|unique:users",
-			"password" => "required|confirmed",
+			"user_name" => "required|unique:users|between:2,12",
+			"password" => "required|confirmed|min:6",
 			"password_confirmation" => "required",			
-			"email" => "required|email|unique:users",			
+			"email" => "required|email|unique:users",
+			"first_name" => "alpha",
+			"last_name" => "alpha"				
 			);
 
 
@@ -120,3 +117,101 @@ Route::get('/', function()
 
 	});
 //------------------Get Logged user and edit details data-------------------------------------	
+
+
+//------------------Update User Details -Send new form data to DB-------------------------------------
+	Route::put('users/{id}', function($id) {
+
+	//validate data
+	$aRules = array(
+		'user_name' => 'required|unique:users,user_name,'.$id,
+		'email'=>'required|email|unique:users,email,'.$id,
+		'password'=>'confirmed',
+		'first_name' => 'alpha',
+		'last_name' => 'alpha'	
+	);
+
+
+	$oValidator = Validator::make(Input::all(),$aRules);
+
+	// print_r(Input::has('password'));
+	// die();
+	if($oValidator->passes()){
+		//update user detail
+		$oUser = User::find($id);
+		$oUser->fill(Input::except('password'));
+		$oUser->save();
+
+
+		if(Input::get('password') != ""){
+			$oUser->password = Hash::make(Input::get("password"));
+			$oUser->save();
+		}
+
+		// if(Input::get('user_name') != ""){
+		// 	$oUser->user_name = Input::get("user_name");
+		// 	$oUser->save();
+		// }
+
+
+		
+		//redirect to edit page
+		return Redirect::to("users/".$id.'/edit')->with('successMessage','Your details have been updated!');
+
+	}else{
+		//redirect to editUserForm with sticky input and errors
+		return Redirect::to("users/".$id.'/edit')
+		->withErrors($oValidator)
+		->withInput();
+	}
+
+});
+//------------------Update User Details -Send new form data to DB-------------------------------------		
+
+
+	
+
+//------------------Get Add Unit Form-------------------------------------
+	Route::get('unit/create', function(){
+
+	return View::make("addUnitForm");
+	
+	});
+//------------------Get Add Unit Form-------------------------------------
+
+
+//------------------test-------------------------------------
+	// Route::post('products', function(){
+
+	// 	//validate input
+	// 	$aRules = array(
+	// 		"name"=>"required|unique:products",
+	// 		"description"=>"required",
+	// 		"price"=>"required|numeric",
+	// 		"photo"=>"required"
+	// 		);
+	// 	$oValidator = Validator::make(Input::all(),$aRules);
+
+	// 	if($oValidator->passes()){
+	// 	//uploading photo
+	// 		$sNewName = Input::get("name")."."
+	// 		.Input::file("photo")->getClientOriginalExtension();
+	// 		Input::file("photo")->move("productphotos",$sNewName);
+	// 	//create new product
+
+
+	// 		$aDetails = Input::all();
+	// 		$aDetails['photo'] = $sNewName;
+
+	// 		$oProduct = Product::create($aDetails);
+
+	// 	//redirect to product list
+	// 		return Redirect::to("types/".$oProduct->type_id);
+	// 	}else{
+
+	// 	//redirect new product form with errors and sticky data
+	// 		return Redirect::to("products/create")->withErrors($oValidator)->withInput();
+	// 	}
+
+	// });
+//------------------test-------------------------------------

@@ -9,7 +9,8 @@
 	</div>
 	<!-- register -->
 	<div class="account_form">
-		{{ Form::open(array('url' => 'edit', 'id' => 'account_form', 'name' => 'account_form')) }}		
+
+		{{ Form::open(array('url' => 'users/'.$user->id, 'method'=>'put','id' => 'account_form', 'name' => 'account_form')) }}		
 		<fieldset>
 			<!-- <legend>Registration</legend> -->
 			<h3>View & Manage Account Settings</h3>
@@ -28,7 +29,7 @@
 		</fieldset> 
 		<fieldset>                   
 			<p>RentKing site access:</p>
-			{{Form::text('user_name', $user->user_name,  array('placeholder' => 'username*', 'autocomplete' => 'off',))}}				
+			{{Form::text('user_name', $user->user_name,  array('placeholder' => 'username*', 'autocomplete' => 'off', 'disabled'=>'disabled'))}}				
 			{{$errors->first('user_name','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
 
 			{{ Form::password('password', array('placeholder' => 'password*', 'autocomplete' => 'off', 'id' => 'password')) }}				
@@ -48,8 +49,10 @@
 		{{ Form::button('Save Updated Credentials!', array('class' => 'btn', 'type' => 'submit')) }}
 
 		{{ Form::close()}}
-		
+
+		<p>{{Session::get('successMessage')}}</p>
 	</div>
+
 	<!-- /register -->
 
 

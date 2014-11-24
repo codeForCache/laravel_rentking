@@ -83,10 +83,14 @@
 		<fieldset>                   
 			<p>Unit Photo:</p>
 
-			<div class="unit_image" id="upload_unit_image"><img src="" alt="unit image" width="150px" height="150px"></div>
+			<div class="unit_image" id="upload_unit_image">				
+				{{ HTML::image('img/picture.jpg', 'unit image', array('width' => '150px', 'height' => '150px')) }}
+			</div>
 			
-			{{Form::file('unit_image', '',  array('placeholder' => 'unit image', 'name' => 'unit_image', 'id' => 'unit_image'))}}				
+			
+			{{Form::file('unit_image', array('placeholder' => 'unit image', 'name' => 'unit_image', 'id' => 'unit_image'))}}				
 			{{$errors->first('unit_image','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
+			
 			         
 		</fieldset>
 
