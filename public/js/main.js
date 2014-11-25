@@ -43,14 +43,25 @@ $(document).ready(function(){
 	
 
 	// show hide panels concerning unit id 
-	$(".unit_id").click(function(){
-	 	$(".unit_container").toggleClass("show");
-	 	$(".edit_unit").toggleClass("show");
-	 	$(".tenant_container").toggleClass("show");
-	 	$(".tenant_control").toggleClass("show");
+	$(".uAndT").click(function(){
 
-	 	$(".work_orders").toggleClass("show");
-	 	$(".wo_control").toggleClass("show");
+
+		$(this).find(".unit_container").toggleClass("show");
+	 	$(this).find(".edit_unit").toggleClass("show");
+	 	$(this).find(".tenant_container").toggleClass("show");
+	 	$(this).find(".tenant_control").toggleClass("show");
+
+	 	$(this).find(".work_orders").toggleClass("show");
+	 	$(this).find(".wo_control").toggleClass("show");
+
+
+	 	// $(".unit_container").toggleClass("show");
+	 	// $(".edit_unit").toggleClass("show");
+	 	// $(".tenant_container").toggleClass("show");
+	 	// $(".tenant_control").toggleClass("show");
+
+	 	// $(".work_orders").toggleClass("show");
+	 	// $(".wo_control").toggleClass("show");
 	});
 
 	// work order chat

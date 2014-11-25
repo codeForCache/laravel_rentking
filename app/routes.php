@@ -124,7 +124,7 @@ Route::get('/', function()
 
 	//validate data
 	$aRules = array(
-		'user_name' => 'required|unique:users,user_name,'.$id,
+		'user_name' => 'unique:users,user_name,'.$id,
 		'email'=>'required|email|unique:users,email,'.$id,
 		'password'=>'confirmed',
 		'first_name' => 'alpha',
@@ -153,7 +153,6 @@ Route::get('/', function()
 		// 	$oUser->save();
 		// }
 
-
 		
 		//redirect to edit page
 		return Redirect::to("users/".$id.'/edit')->with('successMessage','Your details have been updated!');
@@ -168,7 +167,6 @@ Route::get('/', function()
 });
 //------------------Update User Details -Send new form data to DB-------------------------------------		
 
-
 	
 
 //------------------Get Add Unit Form-------------------------------------
@@ -178,6 +176,17 @@ Route::get('/', function()
 	
 	});
 //------------------Get Add Unit Form-------------------------------------
+
+
+
+//------------------Get Units-------------------------------------
+	Route::get('units', function(){
+
+
+	return View::make("main")->with('units',Auth::user()->units);
+	
+	});
+//------------------Get Add Unit Form-------------------------------------	
 
 
 //------------------test-------------------------------------

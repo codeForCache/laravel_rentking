@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2014 at 03:07 AM
+-- Generation Time: Nov 25, 2014 at 03:13 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `units` (
 --
 
 INSERT INTO `units` (`id`, `user_id`, `street`, `apt_number`, `city`, `postal_code`, `extra_info`, `unit_type`, `bedrooms`, `bathrooms`, `square_meterage`, `emergency_contact`, `unit_owner`, `desired_rent`, `bank_account`, `unit_image`, `created_at`, `updated_at`, `deleted_at`, `remember_token`) VALUES
-(1, 1, '21 Turner Street', '', 'Auckland', '1010', 'A great place!', '', '3', '2', '789', '021 555 6788', 'Bob Smith', 499, 'KIWI BANK 123 678', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
+(1, 7, '21 Turner Street', '', 'Auckland', '1010', 'A great place!', '', '3', '2', '789', '021 555 6788', 'Bob Smith', 499, 'KIWI BANK 123 678', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `remember_token` varchar(333) NOT NULL,
-  `company_name` varchar(333) NOT NULL,
+  `company_name` varchar(333) DEFAULT NULL,
   `manager` tinyint(4) NOT NULL DEFAULT '1',
   `tenant_image` varchar(333) NOT NULL,
   PRIMARY KEY (`id`),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `user_name`, `password`, `first_name`, `last_name`, `email`, `phone`, `created_at`, `updated_at`, `deleted_at`, `remember_token`, `company_name`, `manager`, `tenant_image`) VALUES
 (1, 'admin', 'admin', 'matthew', 'youngleson', 'matsinyou@gmail.com', '021 262 6382', '2014-11-17 23:05:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'mdev', 1, ''),
 (2, 'tenant1', 'tenant1', 'Tenant', 'One', 't1@email.com', '021 222 4444', '2014-11-17 23:25:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 0, ''),
-(7, 'bobsmith', '$2y$10$zNIsR9AEyVzIl8JcC7dsXeP08TJWuQBOiX7b/QBFMH9KKI0f18ZHa', 'bob', 'smith', 'email@email.email', '223525234234', '2014-11-24 01:49:47', '2014-11-23 12:49:47', '0000-00-00 00:00:00', 'QxzDmfAl2yX1s4FEGm4iN8fEf4XeQH4g5LJGBydP8PjqJUtq9A4sTPDhi01p', 'cc', 1, '');
+(7, 'bobsmith', '$2y$10$zNIsR9AEyVzIl8JcC7dsXeP08TJWuQBOiX7b/QBFMH9KKI0f18ZHa', 'bob', 'smith', 'email@email.email', '021 236 5656', '2014-11-24 23:17:04', '2014-11-24 10:17:04', '0000-00-00 00:00:00', 'QxzDmfAl2yX1s4FEGm4iN8fEf4XeQH4g5LJGBydP8PjqJUtq9A4sTPDhi01p', 'cc', 1, '');
 
 -- --------------------------------------------------------
 
