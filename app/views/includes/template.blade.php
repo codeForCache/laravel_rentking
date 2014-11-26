@@ -69,7 +69,7 @@
                         <li><a href="{{URL::to('/')}}"><i class="fa fa-home fa-fw fa-lg"></i> <span>Units & Tenants</span></a></li>
                         <li><a href=""><i class="fa fa-cogs fa-fw fa-lg"></i> <span>Work Orders</span></a></li>
                          <li><a href=""><i class="fa fa-comments-o fa-fw fa-lg"></i> <span>Messages</span></a></li>
-                        <li><a href=""><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Add A Unit</span></a></li>
+                        <li><a href="{{URL::to('units/create')}}"><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Add A Unit</span></a></li>
                     </ul>
                 </li>
                 <li><a href="#">Tenants</a>

@@ -14,7 +14,7 @@
 Route::get('/', function()
 {
 	//return View::make('hello');
-	return View::make('main'); 
+	return View::make("main")->with('units',Auth::user()->units);
 });
 
 
@@ -170,7 +170,7 @@ Route::get('/', function()
 	
 
 //------------------Get Add Unit Form-------------------------------------
-	Route::get('unit/create', function(){
+	Route::get('units/create', function(){
 
 	return View::make("addUnitForm");
 	
@@ -179,48 +179,56 @@ Route::get('/', function()
 
 
 
+//------------------units create POST route-------------------------------------
+	Route::post('units', function(){
+
+		//validate input
+		$aRules = array(
+			"street"=>"required",
+			"city"=>"required",
+			"postal_code"=>"required|numeric",
+			"unit_type"=>"required",
+			"unit_owner"=>"required",
+			"unit_image"=>""
+			);
+		$oValidator = Validator::make(Input::all(),$aRules);
+
+		if($oValidator->passes()){
+			//uploading photo
+			$sNewName = Input::get("street")."."
+							.Input::file("unit_image")->getClientOriginalExtension();
+			Input::file("unit_image")->move("img/unit_images",$sNewName);
+			
+
+			//post new unit data
+			$aDetails = Input::all();
+			$aDetails['unit_image'] = $sNewName;
+			$aDetails['user_id'] = Auth::user()->id;
+
+			$oUnit = Unit::create($aDetails);
+
+			//redirect to ....
+			return Redirect::to("units");
+		}else{
+
+			//redirect new unit form with errors and sticky data
+			return Redirect::to("units/create")->withErrors($oValidator)->withInput();
+		}
+	
+	});
+//------------------units create POST route-------------------------------------	
+	
+
+
 //------------------Get Units-------------------------------------
 	Route::get('units', function(){
-
 
 	return View::make("main")->with('units',Auth::user()->units);
 	
 	});
-//------------------Get Add Unit Form-------------------------------------	
+//------------------Get Units-------------------------------------	
 
 
 //------------------test-------------------------------------
-	// Route::post('products', function(){
-
-	// 	//validate input
-	// 	$aRules = array(
-	// 		"name"=>"required|unique:products",
-	// 		"description"=>"required",
-	// 		"price"=>"required|numeric",
-	// 		"photo"=>"required"
-	// 		);
-	// 	$oValidator = Validator::make(Input::all(),$aRules);
-
-	// 	if($oValidator->passes()){
-	// 	//uploading photo
-	// 		$sNewName = Input::get("name")."."
-	// 		.Input::file("photo")->getClientOriginalExtension();
-	// 		Input::file("photo")->move("productphotos",$sNewName);
-	// 	//create new product
-
-
-	// 		$aDetails = Input::all();
-	// 		$aDetails['photo'] = $sNewName;
-
-	// 		$oProduct = Product::create($aDetails);
-
-	// 	//redirect to product list
-	// 		return Redirect::to("types/".$oProduct->type_id);
-	// 	}else{
-
-	// 	//redirect new product form with errors and sticky data
-	// 		return Redirect::to("products/create")->withErrors($oValidator)->withInput();
-	// 	}
-
-	// });
+	
 //------------------test-------------------------------------

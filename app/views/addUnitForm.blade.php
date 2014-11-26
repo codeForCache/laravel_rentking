@@ -9,7 +9,7 @@
 	</div>
 	<!-- register -->
 	<div class="unit_form">
-		{{ Form::open(array('url' => 'edit', 'id' => 'unit_form', 'name' => 'unit_form')) }}		
+		{{ Form::open(array('url' => 'units', 'files'=>'true','id' => 'unit_form', 'name' => 'unit_form')) }}		
 		<fieldset>
 			<!-- <legend>Registration</legend> -->
 			<h3>Adding A New Unit</h3>
@@ -30,7 +30,7 @@
 				{{Form::text('postal_code', '',  array('placeholder' => 'postal code*', 'autocomplete' => 'off', 'required' => 'required'))}}				
 				{{$errors->first('postal_code','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
                 
-				{{Form::text('extra_info', '',  array('placeholder' => 'extra info', 'autocomplete' => 'off', 'required' => 'required'))}}				
+				{{Form::text('extra_info', '',  array('placeholder' => 'extra info', 'autocomplete' => 'off'))}}				
 				{{$errors->first('extra_info','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
                 
 
@@ -44,7 +44,7 @@
 				  'Multi-family' => array('Apartment'=>'Apartment', 'Multi-family'=>'Multi-family', 'Studio'=>'Studio'),
 				  'Commercial' => array('Commercial'=>'Commercial','Industrial'=> 'Industrial', 'Office'=>'Office', 'Retail'=>'Retail', 'Warehouse'=>'Warehouse'),
 				),'0',
-				array('class' => 'unit_type')
+				array('class' => 'unit_type', 'required' => 'required')
 			)}}
 			
 			{{Form::number('bedrooms', '',  array('placeholder' => 'bedrooms', 'autocomplete' => 'off'))}}				
@@ -75,7 +75,7 @@
 		<fieldset>                   
 			<p>Bank Accounts:</p>
 			
-			{{Form::text('bank_account', '',  array('placeholder' => 'operating bank account', 'autocomplete' => 'off', 'required' => 'required'))}}				
+			{{Form::text('bank_account', '',  array('placeholder' => 'operating bank account', 'autocomplete' => 'off'))}}				
 			{{$errors->first('bank_account','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
 			       
 		</fieldset>

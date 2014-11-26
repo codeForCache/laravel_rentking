@@ -4,7 +4,7 @@
 <div id="main">
 	<div id="crumb">
 		<div class="heading"><i class="fa fa-home fa-fw fa-lg"></i> <span>Units & Tenants</span></div>
-		<div class="action"><a href="{{URL::to('unit/create')}}"><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Add A Unit</span></a></div>
+		<div class="action"><a href="{{URL::to('units/create')}}"><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Add A Unit</span></a></div>
 	</div>
 
 
@@ -17,7 +17,10 @@
 				<div class="tenant_count">{{$unit->leases()->count()}}: Tenants Found</div>
 			</div>               
 			<div class="unit_container">
-				<div class="unit_image"><img src="" alt="unit image" width="150px" height="150px"></div>
+				<div class="unit_image">
+					<!-- <img src="{{URL::to('$unit->unit_image')}}" alt="unit image" width="150px" height="150px"> -->
+					{{ HTML::image('img/unit_images/'.$unit->unit_image, 'unit image', array('width' => '150px', 'height' => '150px')) }}
+				</div>
 				<div class="unit_info">
 					<p>Unit Owner: {{$unit->unit_owner}}</p>
 					<hr>
@@ -35,7 +38,7 @@
 				<div class="unit_income">
 					<hr>
 					<p>Unit Income: $ {{$unit->leases()->sum('rent_amount')}}/month</p>
-				
+					
 					<p>Desired Rent: $ {{$unit->desired_rent}} /month</p>
 				</div>
 			</div>
@@ -86,13 +89,6 @@
 		<!-- /tenant -->
 	</div>
 	@endforeach
-
-
-
-
-
-
-
 
 
 
