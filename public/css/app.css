@@ -6,6 +6,14 @@ html,body{
 }
 @media only screen {
 
+	/*bold*/
+	.bold{
+		font-weight: bold;
+		font-size: 1.1em;
+	}
+
+	/*/bold*/
+
 	/*errors*/
 
 	.errors{
@@ -263,9 +271,14 @@ html,body{
 		color: #fff;
 	}
 
+	.heading a{
+		color: #fff;
+	}
+
 	.action{
 		display: block;
-		float: right;		
+		float: right;
+		color: #fff;		
 	}
 
 	.action>a{

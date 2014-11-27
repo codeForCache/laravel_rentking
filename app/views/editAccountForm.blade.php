@@ -17,9 +17,12 @@
 			<h4>Please update your details below:</h4>				
 
 			<p>Account Details:</p>
-			{{Form::text('first_name', $user->first_name,  array('placeholder' => 'first name', 'autocomplete' => 'on', 'id' => 'firstname'))}}				
+			{{Form::text('first_name', $user->first_name,  array('placeholder' => 'first name', 'autocomplete' => 'on', 'id' => 'firstname'))}}
+			{{$errors->first('first_name','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}				
 
 			{{Form::text('last_name', $user->last_name,  array('placeholder' => 'last name', 'autocomplete' => 'on', 'id' => 'lastname'))}}
+			{{$errors->first('last_name','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
+
 
 			{{Form::email('email', $user->email,  array('placeholder' => 'email address*', 'autocomplete' => 'on', 'id' => 'email'))}}				
 			{{$errors->first('email','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
@@ -50,7 +53,7 @@
 
 		{{ Form::close()}}
 
-		<p>{{Session::get('successMessage')}}</p>
+		<h3>{{Session::get('successMessage')}}</h3>
 	</div>
 
 	<!-- /register -->

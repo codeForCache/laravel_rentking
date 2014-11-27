@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2014 at 03:13 AM
+-- Generation Time: Nov 27, 2014 at 02:42 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -109,14 +109,18 @@ CREATE TABLE IF NOT EXISTS `units` (
   `remember_token` varchar(333) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `units`
 --
 
 INSERT INTO `units` (`id`, `user_id`, `street`, `apt_number`, `city`, `postal_code`, `extra_info`, `unit_type`, `bedrooms`, `bathrooms`, `square_meterage`, `emergency_contact`, `unit_owner`, `desired_rent`, `bank_account`, `unit_image`, `created_at`, `updated_at`, `deleted_at`, `remember_token`) VALUES
-(1, 7, '21 Turner Street', '', 'Auckland', '1010', 'A great place!', '', '3', '2', '789', '021 555 6788', 'Bob Smith', 499, 'KIWI BANK 123 678', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
+(1, 7, '33 Turner Street', '4B', 'Auckland', '1010', 'A great place!', '0', '4', '3', '1200', '021 555 6788', 'Bob Smith', 999, 'KIWI BANK 123 678', '55 fractal street.jpg', '0000-00-00 00:00:00', '2014-11-26 12:29:03', '0000-00-00 00:00:00', ''),
+(8, 7, '55 test str', '', 'auck', '5656', '', '0', '', '', '', '', 'person', 0, '', '33 fractal street.jpg', '2014-11-25 11:48:24', '2014-11-26 11:59:22', '0000-00-00 00:00:00', ''),
+(9, 7, '99 K Road', '', 'Auckland', '1212', '', '0', '', '', '', '', 'jack smith', 0, '', '21 fractal street.jpg', '2014-11-25 13:01:59', '2014-11-26 11:57:11', '0000-00-00 00:00:00', ''),
+(10, 7, '99 Turner Street', '4A', 'Auckland', '5656', 'A home with a view!', '0', '2', '4', '988', '021 565 3434', 'Lauren Patra', 899, '56565 65656 73737', '56 fractal street.jpg', '2014-11-25 13:13:32', '2014-11-26 11:45:47', '0000-00-00 00:00:00', ''),
+(11, 8, '56 fractal street', '', 'Berlin', '8889', 'Our house!', '0', '4', '2', '800', '888 88 888888', 'Gabriel', 699, '456363454353434', '56 fractal street.jpg', '2014-11-26 10:19:21', '2014-11-26 12:01:23', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -141,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `tenant_image` varchar(333) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`,`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `users`
@@ -150,7 +154,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `user_name`, `password`, `first_name`, `last_name`, `email`, `phone`, `created_at`, `updated_at`, `deleted_at`, `remember_token`, `company_name`, `manager`, `tenant_image`) VALUES
 (1, 'admin', 'admin', 'matthew', 'youngleson', 'matsinyou@gmail.com', '021 262 6382', '2014-11-17 23:05:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'mdev', 1, ''),
 (2, 'tenant1', 'tenant1', 'Tenant', 'One', 't1@email.com', '021 222 4444', '2014-11-17 23:25:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 0, ''),
-(7, 'bobsmith', '$2y$10$zNIsR9AEyVzIl8JcC7dsXeP08TJWuQBOiX7b/QBFMH9KKI0f18ZHa', 'bob', 'smith', 'email@email.email', '021 236 5656', '2014-11-24 23:17:04', '2014-11-24 10:17:04', '0000-00-00 00:00:00', 'QxzDmfAl2yX1s4FEGm4iN8fEf4XeQH4g5LJGBydP8PjqJUtq9A4sTPDhi01p', 'cc', 1, '');
+(7, 'bobsmith', '$2y$10$zNIsR9AEyVzIl8JcC7dsXeP08TJWuQBOiX7b/QBFMH9KKI0f18ZHa', 'bob', 'smith', 'email@email.email', '021 236 5656', '2014-11-26 23:16:39', '2014-11-26 10:16:39', '0000-00-00 00:00:00', '4XmbDWecPb550nQDrUViN8lXxmMSssqUDrADWYXrZOvepE3ivZD2d8zyOzSE', 'cc', 1, ''),
+(8, 'prometheus', '$2y$10$sCoiQL2K5fdL0dLq/LIcdedBjuv4Dc1qHo5igfu4HmKbTjXNfa.Ti', 'p', 'rising', 'p@rising.net', '09 4545 678', '2014-11-26 23:50:22', '2014-11-26 10:50:22', '0000-00-00 00:00:00', 'l8oiMy8st5G7zDsYf9YtitQy4LGWkQVLUdOWzoNjBFLHh5OB1uuwnhD58WNM', 'proM', 1, '');
 
 -- --------------------------------------------------------
 

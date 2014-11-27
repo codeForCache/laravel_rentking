@@ -39,30 +39,20 @@ $(document).ready(function(){
 	 	}
 	 		 	 		 	
 	});
-	
-	
-
-	// show hide panels concerning unit id 
-	$(".uAndT").click(function(){
 
 
-		$(this).find(".unit_container").toggleClass("show");
-	 	$(this).find(".edit_unit").toggleClass("show");
-	 	$(this).find(".tenant_container").toggleClass("show");
-	 	$(this).find(".tenant_control").toggleClass("show");
+	$(".unit_id").click(function(){
 
-	 	$(this).find(".work_orders").toggleClass("show");
-	 	$(this).find(".wo_control").toggleClass("show");
+		$(this).parent().parent().find(".unit_container").toggleClass("show");
+		$(this).parent().parent().find(".edit_unit").toggleClass("show");
+		$(this).parent().parent().find(".tenant_container").toggleClass("show");
+		$(this).parent().parent().find(".tenant_control").toggleClass("show");
 
+		$(this).parent().parent().find(".work_orders").toggleClass("show");
+		$(this).parent().parent().find(".wo_control").toggleClass("show");
 
-	 	// $(".unit_container").toggleClass("show");
-	 	// $(".edit_unit").toggleClass("show");
-	 	// $(".tenant_container").toggleClass("show");
-	 	// $(".tenant_control").toggleClass("show");
-
-	 	// $(".work_orders").toggleClass("show");
-	 	// $(".wo_control").toggleClass("show");
 	});
+
 
 	// work order chat
 	$("#tap_here").click(function(){
@@ -73,6 +63,32 @@ $(document).ready(function(){
 	$(".unit_id").click(function(){
 	 	$(".reply_container").toggleClass("show");	 	
 	});
+	
+	
+
+	// show hide panels concerning unit id 
+	// $(".uAndT").click(function(){
+
+
+	// 	$(this).find(".unit_container").toggleClass("show");
+	//  	$(this).find(".edit_unit").toggleClass("show");
+	//  	$(this).find(".tenant_container").toggleClass("show");
+	//  	$(this).find(".tenant_control").toggleClass("show");
+
+	//  	$(this).find(".work_orders").toggleClass("show");
+	//  	$(this).find(".wo_control").toggleClass("show");
+
+
+	//  	// $(".unit_container").toggleClass("show");
+	//  	// $(".edit_unit").toggleClass("show");
+	//  	// $(".tenant_container").toggleClass("show");
+	//  	// $(".tenant_control").toggleClass("show");
+
+	//  	// $(".work_orders").toggleClass("show");
+	//  	// $(".wo_control").toggleClass("show");
+	// });
+
+
 
 
    

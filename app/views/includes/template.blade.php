@@ -86,7 +86,11 @@
                         <li><a href="{{URL::to('users/create')}}"><i class="fa fa-pencil fa-fw fa-lg"></i> <span>Account Registration</span></a></li>                        
                     </ul>
                 </li>
+                @if(Auth::check())
+                <li><a href="{{URL::to('logout')}}">Log Out</a></li>   
+                @else
                 <li><a href="{{URL::to('login')}}">Log in</a></li>
+                @endif
             </ul>            
         </div>
         <!-- main -->

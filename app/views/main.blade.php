@@ -17,40 +17,41 @@
 				<div class="tenant_count">{{$unit->leases()->count()}}: Tenants Found</div>
 			</div>               
 			<div class="unit_container">
-				<div class="unit_image">
-					<!-- <img src="{{URL::to('$unit->unit_image')}}" alt="unit image" width="150px" height="150px"> -->
+				<div class="unit_image">					
 					{{ HTML::image('img/unit_images/'.$unit->unit_image, 'unit image', array('width' => '150px', 'height' => '150px')) }}
 				</div>
 				<div class="unit_info">
-					<p>Unit Owner: {{$unit->unit_owner}}</p>
+					<p><span class = "bold">Unit Owner</span>: {{$unit->unit_owner}}</p>
+					<p><span class = "bold">Unit Type</span>: {{$unit->unit_type}}</p>
 					<hr>
 					
-					<p>Address line 1: {{$unit->street}}</p>
-					<p>Address line 2: {{$unit->postal_code}}, {{$unit->city}}</p>					
-					<p>Extra Info: {{$unit->extra_info}}</p>
-					<p>Emergency Contact: {{$unit->emergency_contact}}</p>
+					<p><span class = "bold">Street Address</span>: {{$unit->street}}</p>
+					<p><span class = "bold">Postal & City</span>: {{$unit->postal_code}}, {{$unit->city}}</p>					
+					<p><span class = "bold">Extra Info</span>: {{$unit->extra_info}}</p>
+					<p><span class = "bold">Emergency Contact</span>: {{$unit->emergency_contact}}</p>
 					<hr>
-					<p>Unit Details: <span>{{$unit->bedrooms}}br/{{$unit->bathrooms}}ba</span>, <span>{{$unit->square_meterage}}m²</span> </p>
-					<p>{{$unit->leases()->count()}}: Tenants</p>
-					<p>{{$unit->workorders()->count()}}: Active Work Orders</p>
+					<p><span class = "bold">Unit Details</span>: <span>{{$unit->bedrooms}}br/{{$unit->bathrooms}}ba</span>, <span>{{$unit->square_meterage}}m²</span> </p>
+					<p><span class = "bold">{{$unit->leases()->count()}}</span>: Tenants</p>
+					<p><span class = "bold">{{$unit->workorders()->count()}}</span>: Active Work Orders</p>
 
 				</div>
 				<div class="unit_income">
 					<hr>
-					<p>Unit Income: $ {{$unit->leases()->sum('rent_amount')}}/month</p>
+					<p><span class = "bold">Unit Income</span>: $ {{$unit->leases()->sum('rent_amount')}}/month</p>
 					
-					<p>Desired Rent: $ {{$unit->desired_rent}} /month</p>
+					<p><span class = "bold">Desired Rent</span>: $ {{$unit->desired_rent}} /month</p>
 				</div>
 			</div>
 			<div class="edit_unit">
-				<div class="heading">Edit This Unit <i class="fa fa-pencil-square-o"></i></div>
-				<div class="action"><a href="#"><i class="fa fa-plus-square fa-fw fa-lg"></i> Add Tenant(s)</a></div>
+				<div class="heading"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>{{HTML::link('units/'.$unit->id.'/edit', 'Edit This Unit')}} </div>
+				<div class="action"><i class="fa fa-plus-square fa-fw fa-lg"></i>{{HTML::link('units/', 'Add Tenant(s)')}} </div>
 			</div>                              
 		</div>		
 		<!-- /unit -->
 		
 		
 		<!-- tenant -->
+		
 		<div class="tenant_panel">
 			<div class="tenant_container">
 				<div class="tenant_image"><img src="" alt="tenant image" width="150px" height="150px"></div>
@@ -85,6 +86,8 @@
 				</div>
 			</div>              
 		</div>
+		
+
 		
 		<!-- /tenant -->
 	</div>

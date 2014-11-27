@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function()
-{
-	//return View::make('hello');
+Route::get('/', function(){
+
 	return View::make("main")->with('units',Auth::user()->units);
+
 });
 
 
@@ -127,8 +127,8 @@ Route::get('/', function()
 		'user_name' => 'unique:users,user_name,'.$id,
 		'email'=>'required|email|unique:users,email,'.$id,
 		'password'=>'confirmed',
-		'first_name' => 'alpha',
-		'last_name' => 'alpha'	
+		'first_name' => 'required|alpha',
+		'last_name' => 'required|alpha'	
 	);
 
 
@@ -148,11 +148,7 @@ Route::get('/', function()
 			$oUser->save();
 		}
 
-		// if(Input::get('user_name') != ""){
-		// 	$oUser->user_name = Input::get("user_name");
-		// 	$oUser->save();
-		// }
-
+		
 		
 		//redirect to edit page
 		return Redirect::to("users/".$id.'/edit')->with('successMessage','Your details have been updated!');
@@ -226,7 +222,81 @@ Route::get('/', function()
 	return View::make("main")->with('units',Auth::user()->units);
 	
 	});
-//------------------Get Units-------------------------------------	
+//------------------Get Units-------------------------------------
+
+
+
+//------------------Get Edit Unit Form-------------------------------------
+	Route::get('units/{id}/edit', function($id) {	
+
+		// if($id != Auth::user()->id){
+		// 	return Redirect::to('login');
+		// }
+
+
+		$oUnit = Unit::find($id);
+		return View::make("editUnitsForm")->with("unit", $oUnit);
+
+	});
+//------------------Get Edit Unit Form-------------------------------------	
+
+
+
+//------------------Update Unit Details -Send new form data to DB-------------------------------------
+	Route::put('units/{id}', function($id) {
+
+	//validate data
+	$aRules = array(
+		"street"=>"required",
+		"city"=>"required",
+		"postal_code"=>"required|numeric",
+		"unit_type"=>"required",
+		"unit_owner"=>"required"
+	);
+
+
+	$oValidator = Validator::make(Input::all(),$aRules);
+
+	
+	if($oValidator->passes()){
+		//update user detail
+
+		$aDetails = Input::all();
+		$oUnit = Unit::find($id);
+
+
+		$aDetails['unit_image'] = $oUnit->unit_image;
+		$oUnit->fill($aDetails);
+		$oUnit->save();		
+
+		if(Input::hasFile("unit_image")){
+			Input::file("unit_image")->move("img/unit_images",$oUnit->unit_image);
+		}
+		
+		//redirect to edit page
+		return Redirect::to("units/".$id.'/edit')->with('successMessage','Your details have been updated!');
+
+	}else{
+		//redirect to editUserForm with sticky input and errors
+		return Redirect::to("units/".$id.'/edit')
+		->withErrors($oValidator)
+		->withInput();
+	}
+
+});
+//------------------Update Unit Details -Send new form data to DB-------------------------------------		
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //------------------test-------------------------------------
