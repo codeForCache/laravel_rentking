@@ -42,9 +42,23 @@
 					<p><span class = "bold">Desired Rent</span>: $ {{$unit->desired_rent}} /month</p>
 				</div>
 			</div>
-			<div class="edit_unit">
+			<!-- <div class="edit_unit">
 				<div class="heading"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>{{HTML::link('units/'.$unit->id.'/edit', 'Edit This Unit')}} </div>
-				<div class="action"><i class="fa fa-plus-square fa-fw fa-lg"></i>{{HTML::link('units/', 'Add Tenant(s)')}} </div>
+				<div class="action"><i class="fa fa-plus-square fa-fw fa-lg"></i>{{HTML::link('leases/create?unitid='.$unit->id, 'Add Lease(s)')}} </div>
+			</div> -->
+			<div class="tenant_control self_clear">                    
+				<div class="list_left">
+					<ul>
+						<li><a href="{{URL::to('units/'.$unit->id.'/edit')}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>Edit This Unit</a></li>
+						
+					</ul>                        
+				</div>
+				<div class="list_right">
+					<ul>                            
+						<li><a href="{{URL::to('leases/create?unitid='.$unit->id)}}"><i class="fa fa-plus-square fa-fw fa-lg"></i>Add Lease(s)</a></li>
+						<li><a href="{{URL::to('leases/create?unitid='.$unit->id)}}"><i class="fa fa-plus-square fa-fw fa-lg"></i>Edit This Lease</a></li>
+					</ul>                        
+				</div>
 			</div>                              
 		</div>		
 		<!-- /unit -->

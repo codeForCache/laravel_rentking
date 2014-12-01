@@ -15,7 +15,7 @@ Route::get('/', function(){
 
 	return View::make("main")->with('units',Auth::user()->units);
 
-});
+})->before("auth");
 
 
 //------------------Create New Manager Form-------------------------------------
@@ -60,7 +60,7 @@ Route::get('/', function(){
 
 		}
 	
-	});
+	})->before("auth|admin");
 //------------------Validate new user creation-------------------------------------
 
 
@@ -211,17 +211,20 @@ Route::get('/', function(){
 			return Redirect::to("units/create")->withErrors($oValidator)->withInput();
 		}
 	
-	});
+	})->before("auth|admin");
 //------------------units create POST route-------------------------------------	
 	
 
 
 //------------------Get Units-------------------------------------
-	Route::get('units', function(){
+	Route::get('units', function(){		
+
 
 	return View::make("main")->with('units',Auth::user()->units);
 	
-	});
+
+	})->before("auth|admin");
+
 //------------------Get Units-------------------------------------
 
 
@@ -229,11 +232,7 @@ Route::get('/', function(){
 //------------------Get Edit Unit Form-------------------------------------
 	Route::get('units/{id}/edit', function($id) {	
 
-		// if($id != Auth::user()->id){
-		// 	return Redirect::to('login');
-		// }
-
-
+		
 		$oUnit = Unit::find($id);
 		return View::make("editUnitsForm")->with("unit", $oUnit);
 
@@ -288,8 +287,25 @@ Route::get('/', function(){
 
 
 
+//------------------Get add leases Form-------------------------------------
+	Route::get('leases/create', function(){	
 
 
+	return View::make("addLeaseForm")->with('unit',Unit::find(Input::get("unitid")));
+	
+	});
+//------------------Get add leases Form-------------------------------------
+
+
+
+//------------------Get Edit Unit Form-------------------------------------
+	Route::get('leases/{id}/edit', function($id) {	
+
+		
+		return View::make("editLeaseForm");
+
+	});
+//------------------Get Edit Unit Form-------------------------------------	
 
 
 
