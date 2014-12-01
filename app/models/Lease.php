@@ -7,6 +7,8 @@ class Lease extends Eloquent{
 	public function unit(){
 		return $this->belongsTo("Unit");
 	}
+
+	protected $fillable = array('rent_amount', 'bond', 'recurring', 'lease_start', 'lease_end');
 	
 }
 

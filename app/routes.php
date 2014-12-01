@@ -60,7 +60,7 @@ Route::get('/', function(){
 
 		}
 	
-	})->before("auth|admin");
+	})->before("auth");
 //------------------Validate new user creation-------------------------------------
 
 
@@ -211,7 +211,7 @@ Route::get('/', function(){
 			return Redirect::to("units/create")->withErrors($oValidator)->withInput();
 		}
 	
-	})->before("auth|admin");
+	})->before("auth");
 //------------------units create POST route-------------------------------------	
 	
 
@@ -223,7 +223,7 @@ Route::get('/', function(){
 	return View::make("main")->with('units',Auth::user()->units);
 	
 
-	})->before("auth|admin");
+	})->before("auth");
 
 //------------------Get Units-------------------------------------
 
@@ -291,21 +291,47 @@ Route::get('/', function(){
 	Route::get('leases/create', function(){	
 
 
-	return View::make("addLeaseForm")->with('unit',Unit::find(Input::get("unitid")));
+	return View::make("addLeasesForm")->with('unit',Unit::find(Input::get("unitid")));
 	
 	});
 //------------------Get add leases Form-------------------------------------
 
 
 
-//------------------Get Edit Unit Form-------------------------------------
-	Route::get('leases/{id}/edit', function($id) {	
+//------------------Validate new user creation-------------------------------------
+	Route::post('leases', function(){
 
-		
-		return View::make("editLeaseForm");
+	//validate input
+		$aRules = array(			
+			"rent_amount" => "required"				
+			);
 
-	});
-//------------------Get Edit Unit Form-------------------------------------	
+
+		$oValidator = Validator::make(Input::all(),$aRules);
+
+
+		if($oValidator->passes()){			
+
+			//post new lease data
+			$aDetails = Input::all();			
+			
+
+			$oLease = Lease::create($aDetails);
+
+			//redirect to ....
+			return Redirect::to("leases/".$id.'/edit')->with('successMessage','Your details have been updated!');
+		}else{
+
+			//redirect new unit form with errors and sticky data
+			return Redirect::to("leases/create")->withErrors($oValidator)->withInput();
+		}
+	
+	})->before("auth");
+//------------------Validate new user creation-------------------------------------
+
+
+
+
 
 
 
