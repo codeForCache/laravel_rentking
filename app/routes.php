@@ -134,8 +134,7 @@ Route::get('/', function(){
 
 	$oValidator = Validator::make(Input::all(),$aRules);
 
-	// print_r(Input::has('password'));
-	// die();
+	
 	if($oValidator->passes()){
 		//update user detail
 		$oUser = User::find($id);
@@ -298,7 +297,7 @@ Route::get('/', function(){
 
 
 
-//------------------Validate new user creation-------------------------------------
+//------------------leases/create post data-------------------------------------
 	Route::post('leases', function(){
 
 	//validate input
@@ -313,21 +312,87 @@ Route::get('/', function(){
 		if($oValidator->passes()){			
 
 			//post new lease data
-			$aDetails = Input::all();			
-			
-
+			$aDetails = Input::all();
 			$oLease = Lease::create($aDetails);
 
 			//redirect to ....
-			return Redirect::to("leases/".$id.'/edit')->with('successMessage','Your details have been updated!');
+			return Redirect::to('units');
 		}else{
 
 			//redirect new unit form with errors and sticky data
-			return Redirect::to("leases/create")->withErrors($oValidator)->withInput();
+			return Redirect::to("leases/create?unitid=".Input::get("unit_id"))->withErrors($oValidator)->withInput();
 		}
 	
 	})->before("auth");
-//------------------Validate new user creation-------------------------------------
+//------------------leases/create post data-------------------------------------
+
+
+
+//------------------Get Edit Leases Form-------------------------------------
+	Route::get('leases/{id}/edit', function($id) {	
+
+		
+		$oLease = Lease::find($id);
+
+		return View::make("editLeasesForm")->with("lease", $oLease);
+
+	});
+//------------------Get Edit Leases Form-------------------------------------		
+
+
+
+//------------------Update Lease Details -Send new form data to DB-------------------------------------
+	Route::put('leases/{id}', function($id) {
+
+	//validate data
+	$aRules = array(
+		"rent_amount" => "required"
+	);
+
+
+	$oValidator = Validator::make(Input::all(),$aRules);
+
+	
+	if($oValidator->passes()){
+		//update lease detail
+
+		$aDetails = Input::all();
+		$oLease = Lease::find($id);
+
+		
+		$oLease->fill($aDetails);
+		$oLease->save();	
+		
+		
+		//redirect to edit page
+		return Redirect::to("leases/".$id.'/edit')->with('successMessage','Your details have been updated!');
+
+	}else{
+		//redirect to editUserForm with sticky input and errors
+		return Redirect::to("leases/".$id.'/edit')
+		->withErrors($oValidator)
+		->withInput();
+	}
+
+});
+//------------------Update Lease Details -Send new form data to DB-------------------------------------	
+
+
+
+
+//------------------Get add workorder Form-------------------------------------
+	Route::get('workorders/create', function(){	
+
+
+	return View::make("addWorkOrderForm")->with('unit',Unit::find(Input::get("unitid")));
+	
+	});
+//------------------Get add workorder Form-------------------------------------
+
+
+
+
+
 
 
 

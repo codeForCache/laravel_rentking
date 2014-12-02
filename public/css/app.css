@@ -466,6 +466,10 @@ html,body{
 		margin-bottom: .314em;
 	}
 
+	.newwo_form textarea{
+		width: 24%
+	}
+
 	.btn {
 		-webkit-border-radius: 12;
 		-moz-border-radius: 12;
@@ -766,6 +770,11 @@ html,body{
 	.registration input, .account_form input, .unit_form input, .reply_form input, .newwo_form input, .login_form input{
 		
 		width: 24%;				
+	}
+
+	.newwo_form textarea{
+
+		width: 24%;		
 	}
 
 	.registration span, .account_form span, .unit_form span, .reply_form span, .newwo_form span, .login_form span{		

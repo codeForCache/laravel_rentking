@@ -40,6 +40,15 @@
 					<p><span class = "bold">Unit Income</span>: $ {{$unit->leases()->sum('rent_amount')}}/month</p>
 					
 					<p><span class = "bold">Desired Rent</span>: $ {{$unit->desired_rent}} /month</p>
+					<hr>
+
+					<h4>Unit Leases</h4>					
+						<ul>
+							@foreach($leases as $lease)
+							<li><a href="{{URL::to('leases/'.$lease->id)}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>Edit Unit Leases</a></li>
+							@endforeach
+						</ul>
+					
 				</div>
 			</div>
 			<!-- <div class="edit_unit">
@@ -49,14 +58,14 @@
 			<div class="tenant_control self_clear">                    
 				<div class="list_left">
 					<ul>
-						<li><a href="{{URL::to('units/'.$unit->id.'/edit')}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>Edit This Unit</a></li>
-						
+						<li><a href="{{URL::to('units/'.$unit->id.'/edit')}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>Edit This Unit</a></li>							
+						<!-- <li><a href="{{URL::to('leases/create?unitid='.$unit->id)}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>Edit Unit Leases</a></li> -->					
 					</ul>                        
 				</div>
 				<div class="list_right">
 					<ul>                            
 						<li><a href="{{URL::to('leases/create?unitid='.$unit->id)}}"><i class="fa fa-plus-square fa-fw fa-lg"></i>Add Lease(s)</a></li>
-						<li><a href="{{URL::to('leases/create?unitid='.$unit->id)}}"><i class="fa fa-plus-square fa-fw fa-lg"></i>Edit This Lease</a></li>
+						<li><a href="{{URL::to('workorders/create?unitid='.$unit->id)}}"><i class="fa fa-cogs fa-fw fa-lg"></i>Create Work Order</a></li>
 					</ul>                        
 				</div>
 			</div>                              
