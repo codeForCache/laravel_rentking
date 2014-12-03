@@ -28,6 +28,63 @@ Route::get('/', function(){
 
 
 
+//------------------Create New Tenant Form-------------------------------------
+	Route::get('tenant/create', function(){
+
+	return View::make("createTenantForm");
+	
+	});
+//------------------Create New Tenant Form-------------------------------------	
+
+
+
+//------------------Validate new tenant creation-------------------------------------
+	Route::post('tenant', function(){
+
+	//validate input
+		$aRules = array(
+			"user_name" => "required|unique:users|between:2,12",
+			"password" => "required|confirmed|min:6",
+			"password_confirmation" => "required",			
+			"email" => "required|email|unique:users",
+			"first_name" => "alpha",
+			"last_name" => "alpha",
+			"tenant_image"=>""				
+			);
+
+
+		$oValidator = Validator::make(Input::all(),$aRules);
+
+		if($oValidator->fails()){
+			//redirect to users/create with sticky data and errors messages
+			return Redirect::to("tenant/create")->withErrors($oValidator)
+											->withInput();
+		}else{
+
+			//uploading photo
+			$sNewName = date('Y-m-d H:i:s')."."
+							.Input::file("tenant_image")->getClientOriginalExtension();
+			Input::file("tenant_image")->move("img/tenant_images",$sNewName);
+
+
+			//create new user
+			$aDetails = Input::all();
+			$aDetails['tenant_image'] = $sNewName;			
+			$aDetails["password"] = Hash::make($aDetails["password"]);
+			User::create($aDetails);
+
+			//redirect main view page
+			return Redirect::to("/");
+			
+
+		}
+	
+	});
+	
+//------------------Validate new tenant creation-------------------------------------
+
+
+
 //------------------Validate new user creation-------------------------------------
 	Route::post('users', function(){
 
@@ -38,7 +95,8 @@ Route::get('/', function(){
 			"password_confirmation" => "required",			
 			"email" => "required|email|unique:users",
 			"first_name" => "alpha",
-			"last_name" => "alpha"				
+			"last_name" => "alpha"
+							
 			);
 
 
@@ -48,9 +106,12 @@ Route::get('/', function(){
 			//redirect to users/create with sticky data and errors messages
 			return Redirect::to("users/create")->withErrors($oValidator)
 											->withInput();
-		}else{
+		}else{			
+
+
 			//create new user
-			$aDetails = Input::all();			
+			$aDetails = Input::all();
+					
 			$aDetails["password"] = Hash::make($aDetails["password"]);
 			User::create($aDetails);
 
@@ -61,6 +122,7 @@ Route::get('/', function(){
 		}
 	
 	})->before("auth");
+	
 //------------------Validate new user creation-------------------------------------
 
 
@@ -146,7 +208,6 @@ Route::get('/', function(){
 			$oUser->password = Hash::make(Input::get("password"));
 			$oUser->save();
 		}
-
 		
 		
 		//redirect to edit page
@@ -292,7 +353,7 @@ Route::get('/', function(){
 
 	return View::make("addLeasesForm")->with('unit',Unit::find(Input::get("unitid")));
 	
-	});
+	})->before("auth");
 //------------------Get add leases Form-------------------------------------
 
 
@@ -336,8 +397,21 @@ Route::get('/', function(){
 
 		return View::make("editLeasesForm")->with("lease", $oLease);
 
-	});
-//------------------Get Edit Leases Form-------------------------------------		
+	})->before("auth");
+//------------------Get Edit Leases Form-------------------------------------
+
+
+
+//------------------Get Leases View-------------------------------------
+	Route::get('leases/{id}', function($id) {	
+
+		
+		$oLease = Lease::find($id);
+
+		return View::make("leaseView")->with("lease", $oLease);
+
+	})->before("auth");
+//------------------Get Leases View-------------------------------------		
 
 
 
@@ -348,6 +422,7 @@ Route::get('/', function(){
 	$aRules = array(
 		"rent_amount" => "required"
 	);
+
 
 
 	$oValidator = Validator::make(Input::all(),$aRules);
@@ -374,7 +449,7 @@ Route::get('/', function(){
 		->withInput();
 	}
 
-});
+})->before("auth");
 //------------------Update Lease Details -Send new form data to DB-------------------------------------	
 
 
@@ -386,7 +461,7 @@ Route::get('/', function(){
 
 	return View::make("addWorkOrderForm")->with('unit',Unit::find(Input::get("unitid")));
 	
-	});
+	})->before("auth");
 //------------------Get add workorder Form-------------------------------------
 
 

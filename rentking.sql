@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2014 at 02:42 AM
+-- Generation Time: Dec 03, 2014 at 03:12 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `leases` (
   `unit_id` int(11) NOT NULL,
   `rent_amount` float NOT NULL,
   `bond` float NOT NULL,
-  `recurring` varchar(33) NOT NULL,
+  `recurring` varchar(333) NOT NULL,
   `lease_start` date NOT NULL,
   `lease_end` date NOT NULL,
   `tenant_image` varchar(333) NOT NULL,
@@ -43,14 +43,18 @@ CREATE TABLE IF NOT EXISTS `leases` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`unit_id`),
   KEY `unit_id` (`unit_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `leases`
 --
 
 INSERT INTO `leases` (`id`, `user_id`, `unit_id`, `rent_amount`, `bond`, `recurring`, `lease_start`, `lease_end`, `tenant_image`, `created_at`, `updated_at`, `deleted_at`, `remember_token`) VALUES
-(3, NULL, 1, 599, 599, '', '2014-11-01', '2014-12-01', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
+(3, NULL, 1, 599, 599, '', '2014-11-01', '2014-12-01', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
+(4, NULL, 12, 123, 123, '0', '0000-00-00', '0000-00-00', '', '2014-12-01 10:06:14', '2014-12-01 10:06:14', '0000-00-00 00:00:00', ''),
+(5, NULL, 12, 123, 123, '0', '0000-00-00', '0000-00-00', '', '2014-12-01 10:06:57', '2014-12-01 10:06:57', '0000-00-00 00:00:00', ''),
+(6, 1, 12, 400, 800, 'Weekly', '0000-00-00', '0000-00-00', '', '2014-12-01 10:07:54', '2014-12-01 10:07:54', '0000-00-00 00:00:00', ''),
+(7, 7, 12, 200, 800, 'Monthly', '2014-12-05', '2014-12-06', '', '2014-12-01 10:11:21', '2014-12-02 11:37:00', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -109,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `remember_token` varchar(333) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `units`
@@ -120,7 +124,8 @@ INSERT INTO `units` (`id`, `user_id`, `street`, `apt_number`, `city`, `postal_co
 (8, 7, '55 test str', '', 'auck', '5656', '', '0', '', '', '', '', 'person', 0, '', '33 fractal street.jpg', '2014-11-25 11:48:24', '2014-11-26 11:59:22', '0000-00-00 00:00:00', ''),
 (9, 7, '99 K Road', '', 'Auckland', '1212', '', '0', '', '', '', '', 'jack smith', 0, '', '21 fractal street.jpg', '2014-11-25 13:01:59', '2014-11-26 11:57:11', '0000-00-00 00:00:00', ''),
 (10, 7, '99 Turner Street', '4A', 'Auckland', '5656', 'A home with a view!', '0', '2', '4', '988', '021 565 3434', 'Lauren Patra', 899, '56565 65656 73737', '56 fractal street.jpg', '2014-11-25 13:13:32', '2014-11-26 11:45:47', '0000-00-00 00:00:00', ''),
-(11, 8, '56 fractal street', '', 'Berlin', '8889', 'Our house!', '0', '4', '2', '800', '888 88 888888', 'Gabriel', 699, '456363454353434', '56 fractal street.jpg', '2014-11-26 10:19:21', '2014-11-26 12:01:23', '0000-00-00 00:00:00', '');
+(11, 8, '56 fractal street', '', 'Berlin', '8889', 'Our house!', '0', '4', '2', '800', '888 88 888888', 'Gabriel', 699, '456363454353434', '56 fractal street.jpg', '2014-11-26 10:19:21', '2014-11-26 12:01:23', '0000-00-00 00:00:00', ''),
+(12, 7, '21 jump street', '7B', 'auck', '1212', 'some info', 'House', '3', '2', '790', '032 678 9934', 'Jack A', 900, '456456 456 456 456 BANK B', '55 far str.jpg', '2014-11-30 10:19:32', '2014-11-30 10:22:25', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -152,9 +157,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `password`, `first_name`, `last_name`, `email`, `phone`, `created_at`, `updated_at`, `deleted_at`, `remember_token`, `company_name`, `manager`, `tenant_image`) VALUES
-(1, 'admin', 'admin', 'matthew', 'youngleson', 'matsinyou@gmail.com', '021 262 6382', '2014-11-17 23:05:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'mdev', 1, ''),
+(1, 'admin', 'admin', 'matthew', 'youngleson', 'matsinyou@gmail.com', '021 262 6382', '2014-12-03 01:15:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', 'mdev', 1, 'Jellyfish.jpg'),
 (2, 'tenant1', 'tenant1', 'Tenant', 'One', 't1@email.com', '021 222 4444', '2014-11-17 23:25:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 0, ''),
-(7, 'bobsmith', '$2y$10$zNIsR9AEyVzIl8JcC7dsXeP08TJWuQBOiX7b/QBFMH9KKI0f18ZHa', 'bob', 'smith', 'email@email.email', '021 236 5656', '2014-11-26 23:16:39', '2014-11-26 10:16:39', '0000-00-00 00:00:00', '4XmbDWecPb550nQDrUViN8lXxmMSssqUDrADWYXrZOvepE3ivZD2d8zyOzSE', 'cc', 1, ''),
+(7, 'bobsmith', '$2y$10$zNIsR9AEyVzIl8JcC7dsXeP08TJWuQBOiX7b/QBFMH9KKI0f18ZHa', 'bob', 'smith', 'email@email.email', '021 236 5656', '2014-12-03 01:38:55', '2014-12-02 12:38:55', '0000-00-00 00:00:00', '14979AFJzDv1GFRYJSf1yoch3tgYbHTF2a07EE81p2klGWrKakD5qx39mc7s', 'cc', 1, ''),
 (8, 'prometheus', '$2y$10$sCoiQL2K5fdL0dLq/LIcdedBjuv4Dc1qHo5igfu4HmKbTjXNfa.Ti', 'p', 'rising', 'p@rising.net', '09 4545 678', '2014-11-26 23:50:22', '2014-11-26 10:50:22', '0000-00-00 00:00:00', 'l8oiMy8st5G7zDsYf9YtitQy4LGWkQVLUdOWzoNjBFLHh5OB1uuwnhD58WNM', 'proM', 1, '');
 
 -- --------------------------------------------------------

@@ -44,8 +44,8 @@
 
 					<h4>Unit Leases</h4>					
 						<ul>
-							@foreach($leases as $lease)
-							<li><a href="{{URL::to('leases/'.$lease->id)}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>Edit Unit Leases</a></li>
+							@foreach($unit->leases as $lease)
+							<li><a href="{{URL::to('leases/'.$lease->id.'/edit')}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>{{$lease->id}}</a></li>
 							@endforeach
 						</ul>
 					
@@ -72,23 +72,26 @@
 		</div>		
 		<!-- /unit -->
 		
-		
+		@foreach($unit->leases as $lease)
 		<!-- tenant -->
-		
+		@if($lease->user == true)
 		<div class="tenant_panel">
 			<div class="tenant_container">
-				<div class="tenant_image"><img src="" alt="tenant image" width="150px" height="150px"></div>
+				<div class="tenant_image" id="upload_unit_image">	
+					{{ HTML::image('img/tenant_images/'.$lease->user->tenant_image, 'tenant image', array('width' => '150px', 'height' => '150px')) }}
+				</div>
+				
 				<div class="tenant_info">
-					<p>Tenant Name: Bob Smith</p>
-					<p>Email: blah@blah.bleh</p>
-					<p>Phone: 021 564 6789</p>                                         
+					<p>Tenant Name: {{$lease->user->first_name}} {{$lease->user->last_name}}</p>
+					<p>Email: {{$lease->user->email}}</p>
+					<p>Phone: {{$lease->user->phone}}</p>                                         
 				</div>
 				<div class="tenant_dues">
 					<hr>
-					<p>$ 280.00 - DUE; <span>Weekly</span></p>
+					<p>$ 280.00 - DUE; <span>{{$lease->recurring}}</span></p>
 
 					<p>Due On: Nov 21, 2016</p>
-					<p>Lease Renewal: Nov 21, 2016</p>
+					<p>Lease Renewal: {{$lease->lease_end}}</p>
 				</div>
 			</div> 
 			<div class="tenant_control self_clear">                    
@@ -109,7 +112,8 @@
 				</div>
 			</div>              
 		</div>
-		
+		@endif
+		@endforeach
 
 		
 		<!-- /tenant -->

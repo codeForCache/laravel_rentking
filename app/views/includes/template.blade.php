@@ -12,6 +12,7 @@
 
         <link href='http://fonts.googleapis.com/css?family=Fira+Sans|Montserrat' rel='stylesheet' type='text/css'>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
         
         {{HTML::style('css/normalize.min.css')}}
         {{HTML::style('css/main.css')}}
@@ -132,7 +133,7 @@
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         {{HTML::script('js/vendor/modernizr-2.6.2.min.js')}}
         {{HTML::script('js/plugins.js')}}
         {{HTML::script('js/main.js')}}
