@@ -41,14 +41,35 @@
 					
 					<p><span class = "bold">Desired Rent</span>: $ {{$unit->desired_rent}} /month</p>
 					<hr>
+					
+					
+					<h4>Unit Leases:</h4>					
+						<ul>							
+							
+							@forelse($unit->leases as $lease)
+							<?php
+								$tenantFirst ="";
+								if($lease->user == true){
+									$tenantFirst = $lease->user->first_name;
+								}
 
-					<h4>Unit Leases</h4>					
-						<ul>
-							@foreach($unit->leases as $lease)
-							<li><a href="{{URL::to('leases/'.$lease->id.'/edit')}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>{{$lease->id}}</a></li>
-							@endforeach
+								$tenantLast ="";
+								if($lease->user == true){
+									$tenantLast = $lease->user->last_name;
+								}
+							?>									
+							
+							<li><a href="{{URL::to('leases/'.$lease->id)}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>View - Lease ID: {{$lease->id}}; For Tenant: {{$tenantFirst}} {{$tenantLast}}</a></li>
+									
+							@empty
+								<li>No Lease Found; <a href="{{URL::to('leases/create?unitid='.$unit->id)}}">Add a lease?</a></li>
+							@endforelse
+							
+
 						</ul>
 					
+					
+
 				</div>
 			</div>
 			<!-- <div class="edit_unit">
@@ -82,16 +103,17 @@
 				</div>
 				
 				<div class="tenant_info">
-					<p>Tenant Name: {{$lease->user->first_name}} {{$lease->user->last_name}}</p>
-					<p>Email: {{$lease->user->email}}</p>
-					<p>Phone: {{$lease->user->phone}}</p>                                         
+					<p><span class = "bold">Tenant Name</span>: {{$lease->user->first_name}} {{$lease->user->last_name}}</p>
+					<p><span class = "bold">Email</span>: {{$lease->user->email}}</p>
+					<p><span class = "bold">Phone</span>: {{$lease->user->phone}}</p>				                                  
 				</div>
 				<div class="tenant_dues">
 					<hr>
-					<p>$ 280.00 - DUE; <span>{{$lease->recurring}}</span></p>
-
-					<p>Due On: Nov 21, 2016</p>
-					<p>Lease Renewal: {{$lease->lease_end}}</p>
+					<p><span class = "bold">Rent Amount</span>: $ {{$lease->rent_amount}} - DUE; <span>{{$lease->recurring}}</span></p>
+					<p><span class = "bold">Next Payment Due On</span>: Due On: Nov 21, 2016</p>
+					
+					<p><span class = "bold">Lease Renewal</span>: {{$lease->lease_end}}</p>	
+					
 				</div>
 			</div> 
 			<div class="tenant_control self_clear">                    

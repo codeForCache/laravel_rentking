@@ -4,8 +4,8 @@
 
 <div id="main">
 	<div id="crumb">
-		<div class="heading"><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Add Lease(s)</span></div>
-        <div class="action"><a href="{{URL::to('leases/create')}}"><i class="fa fa-eye fa-fw fa-lg"></i> View All Units</a></div>
+		<div class="heading"><i class="fa fa-plus-square fa-fw fa-lg"></i> <span>Edit Lease</span></div>
+        <div class="action"><a href="{{URL::to('units')}}"><i class="fa fa-eye fa-fw fa-lg"></i> View All Units</a></div>
 	</div>
 	<!-- register -->
 	<div class="unit_form">
@@ -13,34 +13,51 @@
 
 		<fieldset>
 			<!-- <legend>Registration</legend> -->
-			<h3>Creating a new lease:</h3>
-            <h4>Please enter details to create a new lease:</h4>			
+			<h3>Viewing Lease:</h3>
+            <h4>Review Lease Details:</h4>			
 
 		</fieldset>
 
+
 		<fieldset>     
 
-			<p>Unit Photo:</p>
+			<div class="unit_info">				
+				<p><span class = "bold">Street Address</span>: {{$lease->unit->street}}</p>
+			</div>
 			
 			<div class="unit_image" id="upload_unit_image">	
 				{{ HTML::image('img/unit_images/'.$lease->unit->unit_image, 'unit image', array('width' => '150px', 'height' => '150px')) }}
 			</div>
 				
+			
 			<div class="unit_info">				
-			<p><span class = "bold">Street Address</span>: {{$lease->unit->street}}</p>
-			</div>	
+				<p><span class = "bold">Tenant:</span> {{$lease->user->first_name}} {{$lease->user->last_name}}</p>
+			</div>
+			
+			<div class="tenant_image" id="upload_unit_image">					
+				{{ HTML::image('img/tenant_images/'.$lease->user->tenant_image, 'tenant image', array('width' => '150px', 'height' => '150px')) }}
+			</div>
+
+
 
 		</fieldset>	
 
+
+		<hr>	
 		<fieldset>                   
-			<p>Rent / Billing :</p> 
+			<h4>Rent / Billing :</h4> 
+				{{Form::label('rent_amount', 'Rent Amount:')}}
 				{{Form::text('rent_amount', $lease->rent_amount,  array('placeholder' => '$__rent amount', 'autocomplete' => 'off'))}}				
 				{{$errors->first('rent_amount','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}                           
                 
+                {{Form::label('bond', 'Bond:')}}
                 {{Form::text('bond', $lease->bond,  array('placeholder' => 'bond amount.', 'autocomplete' => 'off'))}}				
 				{{$errors->first('bond','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
-                
-				                
+
+				{{Form::label('first_payment', 'Date of First Payment:')}}	
+				{{Form::text('first_payment', $lease->first_payment,  array('placeholder' => 'lease start', 'autocomplete' => 'off', 'class'=>'datepicker'))}}				
+				{{$errors->first('first_payment','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
+                				                
 
 		</fieldset>
 		<fieldset>
@@ -51,16 +68,19 @@
 				0 => '~~~~ Select Rent Period ~~~~',
 				  'Recurring' => array('Weekly'=>'Weekly','Fortnightly'=>'Fortnightly','Monthly'=>'Monthly'),
 				  
-				),'0',
+				),$lease->recurring,
 				array('class' => 'recurring')
 			)}}							
 			{{$errors->first('recurring','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
+			
 
-			{{Form::text('lease_start', '',  array('placeholder' => 'lease start', 'autocomplete' => 'off', 'class'=>'datepicker'))}}				
+			{{Form::label('lease_start', 'Lease Start:')}}	
+			{{Form::text('lease_start', $lease->lease_start,  array('placeholder' => 'lease start', 'autocomplete' => 'off', 'class'=>'datepicker'))}}				
 			{{$errors->first('lease_start','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
 
-
-			{{Form::text('lease_end', '',  array('placeholder' => 'lease end', 'autocomplete' => 'off', 'class'=>'datepicker'))}}				
+			
+			{{Form::label('lease_end', 'Lease End:')}}	
+			{{Form::text('lease_end', $lease->lease_end,  array('placeholder' => 'lease end', 'autocomplete' => 'off', 'class'=>'datepicker'))}}				
 			{{$errors->first('lease_end','<span class="errors"><i class="fa fa-exclamation-circle fa-fw fa-lg"></i> :message</span>')}}
 
 

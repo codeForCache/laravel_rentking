@@ -230,7 +230,7 @@ Route::get('/', function(){
 
 	return View::make("addUnitForm");
 	
-	});
+	})->before("auth");
 //------------------Get Add Unit Form-------------------------------------
 
 
@@ -440,7 +440,7 @@ Route::get('/', function(){
 		
 		
 		//redirect to edit page
-		return Redirect::to("leases/".$id.'/edit')->with('successMessage','Your details have been updated!');
+		return Redirect::to("leases/".$id)->with('successMessage','Your details have been updated!');
 
 	}else{
 		//redirect to editUserForm with sticky input and errors
