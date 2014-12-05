@@ -29,7 +29,7 @@ Route::get('/', function(){
 
 
 //------------------Create New Tenant Form-------------------------------------
-	Route::get('tenant/create', function(){
+	Route::get('tenants/create', function(){
 
 	return View::make("createTenantForm");
 	
@@ -39,32 +39,28 @@ Route::get('/', function(){
 
 
 //------------------Validate new tenant creation-------------------------------------
-	Route::post('tenant', function(){
+	Route::post('tenants', function(){
 
 	//validate input
 		$aRules = array(
-			"user_name" => "required|unique:users|between:2,12",
-			"password" => "required|confirmed|min:6",
-			"password_confirmation" => "required",			
-			"email" => "required|email|unique:users",
-			"first_name" => "alpha",
-			"last_name" => "alpha",
+			// "user_name" => "required|unique:users|between:2,12",
+			// "password" => "required|confirmed|min:6",
+			// "password_confirmation" => "required",			
+			// "email" => "required|email|unique:users",
+			// "first_name" => "alpha",
+			// "last_name" => "alpha",
 			"tenant_image"=>""				
 			);
 
 
 		$oValidator = Validator::make(Input::all(),$aRules);
 
-		if($oValidator->fails()){
-			//redirect to users/create with sticky data and errors messages
-			return Redirect::to("tenant/create")->withErrors($oValidator)
-											->withInput();
-		}else{
-
+		if($oValidator->passes()){
 			//uploading photo
-			$sNewName = date('Y-m-d H:i:s')."."
-							.Input::file("tenant_image")->getClientOriginalExtension();
-			Input::file("tenant_image")->move("img/tenant_images",$sNewName);
+			$sNewName = date('Y_m_d_H_i_s').Input::file("tenant_image")->getClientOriginalName();
+
+
+			Input::file("tenant_image")->move("img/tenant_images", $sNewName);
 
 
 			//create new user
@@ -74,12 +70,24 @@ Route::get('/', function(){
 			User::create($aDetails);
 
 			//redirect main view page
-			return Redirect::to("/");
+
+	
+			return Redirect::to("login")->with('successMessage','Account Succesfully Created!');
+
+			
+		}else{
+
+			//redirect to users/create with sticky data and errors messages
+			return Redirect::to("tenant/create")->withErrors($oValidator)
+			->withInput();	
 			
 
 		}
-	
+
 	});
+
+
+
 	
 //------------------Validate new tenant creation-------------------------------------
 
@@ -88,7 +96,7 @@ Route::get('/', function(){
 //------------------Validate new user creation-------------------------------------
 	Route::post('users', function(){
 
-	//validate input
+		//validate input
 		$aRules = array(
 			"user_name" => "required|unique:users|between:2,12",
 			"password" => "required|confirmed|min:6",
@@ -96,31 +104,31 @@ Route::get('/', function(){
 			"email" => "required|email|unique:users",
 			"first_name" => "alpha",
 			"last_name" => "alpha"
-							
+
 			);
 
 
 		$oValidator = Validator::make(Input::all(),$aRules);
 
-		if($oValidator->fails()){
-			//redirect to users/create with sticky data and errors messages
-			return Redirect::to("users/create")->withErrors($oValidator)
-											->withInput();
-		}else{			
-
-
-			//create new user
+		if($oValidator->passes()){
+				//create new user
 			$aDetails = Input::all();
-					
+
 			$aDetails["password"] = Hash::make($aDetails["password"]);
 			User::create($aDetails);
 
-			//redirect main view page
+				//redirect main view page
 			return Redirect::to("/");
-			
+
+
+		}else{	
+
+			//redirect to users/create with sticky data and errors messages
+			return Redirect::to("users/create")->withErrors($oValidator)
+			->withInput();	
 
 		}
-	
+		
 	})->before("auth");
 	
 //------------------Validate new user creation-------------------------------------
@@ -375,6 +383,11 @@ Route::get('/', function(){
 			//post new lease data
 			$aDetails = Input::all();
 			$oLease = Lease::create($aDetails);
+
+			// Mail::send('emails.tenant.welcome', array('rent_amount'=>Input::get('rent_amount')), function($message)
+			// 	{
+			// 	    $message->to('rentking5656@gmail.com', 'John Smith')->subject('Welcome!');
+			// 	});
 
 			//redirect to ....
 			return Redirect::to('units');

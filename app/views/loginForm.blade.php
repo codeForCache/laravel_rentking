@@ -25,8 +25,15 @@
 
 		</fieldset>                  
 
-		{{ Form::button('Login! Start using RentKing!', array('class' => 'btn', 'type' => 'submit')) }}
-
+		{{ Form::button('Login! Start using RentKing!', array('class' => 'btn', 'type' => 'submit')) }}		
+		
+		<div class="createAcc">
+		{{ HTML::link("users/create",'Create New Account!', array('class' => 'btn ')) }}
+		</div>
+		
+		
+		
+		
 
 		{{ Form::close()}}
 	</div>

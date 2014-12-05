@@ -14,12 +14,39 @@ html,body{
 
 	/*/bold*/
 
+	.createAcc{
+		height: 3.314em;		
+		margin-top: .314em;
+		margin-bottom: .314em;		
+		clear: both;
+		height: 3.314em;		
+		padding-top: .628em;
+	}	
+
 	.clear{
 		clear: both;
 	}
 
 	.unit_income ul{
 		list-style-type: none;
+		padding-left: 0;
+	}
+
+	.unit_income ul li{
+		margin: 1em;
+	}
+
+	.unit_income ul a{				
+		color: #505050;
+		padding: .314em;
+		text-decoration: none;
+		border-bottom: 1px solid #505050;	
+		
+	}
+
+	.unit_income ul a:hover{
+		background-color: #3d3d3d;
+		color: #fff;
 	}
 
 	/*errors*/
@@ -664,6 +691,12 @@ html,body{
 
 /*// Medium screens*/
 @media only screen and (min-width: 49em) {
+	#logo img{		
+		width: auto;
+		height: 100%;
+	}
+
+
 	/*navigation*/
 	#control_panel{		
 		width: 33%;						

@@ -51,7 +51,7 @@
                     @if(Auth::check())
                     <li><a href="{{URL::to('users/'.Auth::user()->id.'/edit')}}"><i class="fa fa-user fa-fw fa-lg"></i> <span>Manage Account</span></a></li>
                     @else
-                    <li><a href="{{URL::to('login')}}"><i class="fa fa-user fa-fw fa-lg"></i> <span>Manage Account</span></a></li>    
+                    <li><a href="{{URL::to('users/create')}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i> <span>Create Account</span></a></li>    
                     @endif
                     <li><a href=""><i class="fa fa-cc-visa fa-fw fa-lg"></i> <span>RentKing Billing</span></a></li>
                     @if(Auth::check())

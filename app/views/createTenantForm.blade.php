@@ -9,7 +9,7 @@
 	</div>
 	<!-- register -->
 	<div class="registration">
-		{{ Form::open(array('url' => 'tenant', 'id' => 'registration_form', 'name' => 'registration_form', 'files'=>'true')) }}		
+		{{ Form::open(array('url' => 'tenants', 'id' => 'registration_form', 'name' => 'registration_form', 'files'=>'true')) }}		
 			<fieldset>
 				<!-- <legend>Registration</legend> -->
 				<h3>Tenant Account Registration</h3>

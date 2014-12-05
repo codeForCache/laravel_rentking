@@ -59,7 +59,7 @@
 								}
 							?>									
 							
-							<li><a href="{{URL::to('leases/'.$lease->id)}}"><i class="fa fa-pencil-square-o fa-fw fa-lg"></i>View - Lease ID: {{$lease->id}}; For Tenant: {{$tenantFirst}} {{$tenantLast}}</a></li>
+							<li><a href="{{URL::to('leases/'.$lease->id)}}"><i class="fa fa-eye fa-fw fa-lg"></i>View - Lease [ ID: {{$lease->id}} ] ; For Tenant: {{$tenantFirst}} {{$tenantLast}}</a></li>
 									
 							@empty
 								<li>No Lease Found; <a href="{{URL::to('leases/create?unitid='.$unit->id)}}">Add a lease?</a></li>
