@@ -29,13 +29,11 @@
 		
 		<div class="createAcc">
 		{{ HTML::link("users/create",'Create New Account!', array('class' => 'btn ')) }}
-		</div>
-		
-		
-		
-		
+		</div>	
 
 		{{ Form::close()}}
+
+		<h3>{{Session::get('successMessage')}}</h3>
 	</div>
 	<!-- /register -->
 

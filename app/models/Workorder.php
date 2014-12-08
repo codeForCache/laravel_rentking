@@ -11,6 +11,8 @@ class Workorder extends Eloquent{
 	public function replies(){
 		return $this->hasMany("Reply");
 	}
+
+	protected $fillable = array('unit_id','user_id', 'description', 'priority');
 	
 }
 

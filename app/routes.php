@@ -43,13 +43,14 @@ Route::get('/', function(){
 
 	//validate input
 		$aRules = array(
-			// "user_name" => "required|unique:users|between:2,12",
-			// "password" => "required|confirmed|min:6",
-			// "password_confirmation" => "required",			
-			// "email" => "required|email|unique:users",
-			// "first_name" => "alpha",
-			// "last_name" => "alpha",
-			"tenant_image"=>""				
+			"user_name" => "required|unique:users|between:2,12",
+			"password" => "required|confirmed|min:6",
+			"password_confirmation" => "required",			
+			"email" => "required|email|unique:users",
+			"first_name" => "alpha",
+			"last_name" => "alpha",
+			"tenant_image"=>"",
+			"manager" => ""				
 			);
 
 
@@ -78,7 +79,7 @@ Route::get('/', function(){
 		}else{
 
 			//redirect to users/create with sticky data and errors messages
-			return Redirect::to("tenant/create")->withErrors($oValidator)
+			return Redirect::to("tenants/create")->withErrors($oValidator)
 			->withInput();	
 			
 
@@ -104,7 +105,6 @@ Route::get('/', function(){
 			"email" => "required|email|unique:users",
 			"first_name" => "alpha",
 			"last_name" => "alpha"
-
 			);
 
 
@@ -118,7 +118,7 @@ Route::get('/', function(){
 			User::create($aDetails);
 
 				//redirect main view page
-			return Redirect::to("/");
+			return Redirect::to("login")->with('successMessage','Account Succesfully Created!');
 
 
 		}else{	
@@ -472,14 +472,107 @@ Route::get('/', function(){
 	Route::get('workorders/create', function(){	
 
 
-	return View::make("addWorkOrderForm")->with('unit',Unit::find(Input::get("unitid")));
+	return View::make("addWorkOrdersForm")->with('unit',Unit::find(Input::get("unitid")));
 	
 	})->before("auth");
 //------------------Get add workorder Form-------------------------------------
 
 
 
+//------------------leases/create post data-------------------------------------
+	Route::post('workorders', function(){
 
+	//validate input
+		$aRules = array(			
+			"description" => "required"				
+			);
+
+
+		$oValidator = Validator::make(Input::all(),$aRules);
+
+
+		if($oValidator->passes()){			
+
+			//post new lease data
+			$aDetails = Input::all();
+			$oWorkorder = Workorder::create($aDetails);
+
+			
+			//redirect to view
+			return Redirect::to('workOrdersView');
+		}else{
+
+			//redirect to workorder creation with errors and sticky data
+			return Redirect::to("workorders/create?unitid=".Input::get("unit_id"))->withErrors($oValidator)->withInput();
+		}
+	
+	})->before("auth");
+//------------------leases/create post data-------------------------------------
+
+
+
+//------------------Get Edit Leases Form-------------------------------------
+	Route::get('workorders/{id}/edit', function($id) {	
+
+		
+		$oWorkorder = Workorder::find($id);
+
+		return View::make("editWorkOrdersForm")->with("workorder", $oWorkorder);
+
+	})->before("auth");
+//------------------Get Edit Leases Form-------------------------------------
+
+
+
+//------------------Get Leases View-------------------------------------
+	Route::get('workorders/{id}', function($id) {	
+
+		
+		$oWorkorder = Workorder::find($id);
+
+		return View::make("workOrdersView")->with("workorder", $oWorkorder);
+
+	})->before("auth");
+//------------------Get Leases View-------------------------------------		
+
+
+
+//------------------Update Lease Details -Send new form data to DB-------------------------------------
+	Route::put('workorders/{id}', function($id) {
+
+	//validate data
+	$aRules = array(
+		"description" => "required"	
+	);
+
+
+
+	$oValidator = Validator::make(Input::all(),$aRules);
+
+	
+	if($oValidator->passes()){
+		//update workorder detail
+
+		$aDetails = Input::all();
+		$oWorkorder = Workorder::find($id);
+
+		
+		$oWorkorder->fill($aDetails);
+		$oWorkorder->save();	
+		
+		
+		//redirect to edit page
+		return Redirect::to("leases/".$id)->with('successMessage','Work order has been updated!');
+
+	}else{
+		//redirect to editworkorderform with sticky input and errors
+		return Redirect::to("leases/".$id.'/edit')
+		->withErrors($oValidator)
+		->withInput();
+	}
+
+})->before("auth");
+//------------------Update Lease Details -Send new form data to DB-------------------------------------	
 
 
 
